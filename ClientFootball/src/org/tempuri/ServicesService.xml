@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle-webservice-clients xmlns:ns2="http://java.sun.com/xml/ns/javaee">
+   <webservice-client>
+      <service-qname namespaceURI="http://tempuri.org/"
+                     localpart="ServicesService"/>
+      <port-info>
+         <wsdl-port namespaceURI="http://tempuri.org/"
+                    localpart="ServicesPort"/>
+         <runtime/>
+         <operations>
+            <operation name="list"/>
+            <operation name="delete"/>
+            <operation name="read"/>
+            <operation name="create"/>
+            <operation name="update"/>
+         </operations>
+      </port-info>
+   </webservice-client>
+</oracle-webservice-clients>

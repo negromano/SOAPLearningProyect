@@ -1,0 +1,72 @@
+<xs:schema xmlns:tns="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0"
+     targetNamespace="http://tempuri.org/">
+    <xs:element name="create" type="tns:create"/>
+    <xs:element name="createResponse" type="tns:createResponse"/>
+    <xs:element name="delete" type="tns:delete"/>
+    <xs:element name="deleteResponse" type="tns:deleteResponse"/>
+    <xs:element name="list" type="tns:list"/>
+    <xs:element name="listResponse" type="tns:listResponse"/>
+    <xs:element name="read" type="tns:read"/>
+    <xs:element name="readResponse" type="tns:readResponse"/>
+    <xs:element name="update" type="tns:update"/>
+    <xs:element name="updateResponse" type="tns:updateResponse"/>
+    <xs:complexType name="update">
+        <xs:sequence>
+            <xs:element name="arg0" type="tns:footballer" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="footballer">
+        <xs:sequence>
+            <xs:element name="club" type="xs:string" minOccurs="0"/>
+            <xs:element name="forename" type="xs:string" minOccurs="0"/>
+            <xs:element name="height" type="xs:double"/>
+            <xs:element name="id" type="xs:string" minOccurs="0"/>
+            <xs:element name="number" type="xs:int"/>
+            <xs:element name="position" type="xs:string" minOccurs="0"/>
+            <xs:element name="surname" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="updateResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="delete">
+        <xs:sequence>
+            <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="deleteResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="read">
+        <xs:sequence>
+            <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="readResponse">
+        <xs:sequence>
+            <xs:element name="return" type="tns:footballer" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="list">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="listResponse">
+        <xs:sequence>
+            <xs:element name="return" type="tns:footballer" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="create">
+        <xs:sequence>
+            <xs:element name="arg0" type="tns:footballer" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
