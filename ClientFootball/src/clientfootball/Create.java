@@ -31,10 +31,12 @@ public class Create extends JFrame {
     private JLabel jLabel5 = new JLabel();
     private JLabel jLabel6 = new JLabel();
     private JLabel jLabel7 = new JLabel();
+    private MainFrame mainFrame;
 
-    public Create() {
+    public Create(MainFrame mainFrame) {
         try {
             jbInit();
+            this.mainFrame = mainFrame;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -99,8 +101,10 @@ public class Create extends JFrame {
         int number = Integer.parseInt(jTextField6.getText());
         double height = Double.parseDouble(jTextField7.getText());
         Footballer f = new Footballer(id, forename, surname, position, club, number, height);
+        mainFrame.create(f);
         }catch (Exception exc){
             JOptionPane.showMessageDialog(this, "Eye with it handy");
+            exc.printStackTrace();
         }
     }
 }

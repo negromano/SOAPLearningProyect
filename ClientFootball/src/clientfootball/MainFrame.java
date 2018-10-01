@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -109,12 +110,12 @@ public class MainFrame extends JFrame {
     }
 
     private void create(ActionEvent e) {
-        Create c = new Create();
+        Create c = new Create(this);
         c.setVisible(true);
     }
 
     private void read(ActionEvent e) {
-        Read r = new Read();
+        Read r = new Read(this);
         r.setVisible(true);
     }
 
@@ -131,5 +132,26 @@ public class MainFrame extends JFrame {
     private void list(ActionEvent e) {
         List l = new List();
         l.setVisible(true);
+    }
+    
+    public boolean create(Footballer f){
+        System.out.println(f.getForename());
+        return service.create(f);
+    }
+    
+    public Footballer read(String id){
+        return service.read(id);
+    }
+    
+    public boolean update(Footballer f){
+        return service.update(f);
+    }
+    
+    public boolean delete(String id){
+        return service.delete(id);
+    }
+    
+    public  java.util.List<org.tempuri.Footballer> listF(){
+        return service.list();
     }
 }

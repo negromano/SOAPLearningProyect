@@ -1,6 +1,7 @@
 package serverfootball;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,10 @@ public class Services {
      */
     public List<Footballer> list(){
         return new ArrayList<Footballer>(footballers.values());
+    }
+    
+    public Services(){
+        footballers = new HashMap<String, Footballer>();
     }
     
     /**
