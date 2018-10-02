@@ -11,7 +11,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import org.tempuri.Footballer;
 
 public class Delete extends JFrame {
     private JLabel jLabel7 = new JLabel();
@@ -77,7 +80,7 @@ public class Delete extends JFrame {
         jButton2.setBounds(new Rectangle(145, 225, 100, 20));
         jButton2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    jButton1_actionPerformed(e);
+                    jButton2_actionPerformed(e);
                 }
             });
         this.getContentPane().add(jButton2, null);
@@ -101,5 +104,20 @@ public class Delete extends JFrame {
     private void jButton1_actionPerformed(ActionEvent e) {
         String id =jTextField1.getText();
          mf.delete(id);
+    }
+
+    private void jButton2_actionPerformed(ActionEvent e) {
+        try{
+            String id = jTextField1.getText();
+            Footballer f = mf.read(id);
+            jTextField2.setText(f.getForename());
+            jTextField3.setText(f.getSurname());
+            jTextField4.setText(f.getPosition());
+            jTextField5.setText(f.getClub());
+            jTextField6.setText(String.valueOf(f.getNumber()));
+            jTextField7.setText(String.valueOf(f.getHeight()));
+        }catch(Exception exc){
+            JOptionPane.showMessageDialog(this, "Eye with it handy");
+        }
     }
 }

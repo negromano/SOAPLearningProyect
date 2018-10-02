@@ -120,17 +120,17 @@ public class MainFrame extends JFrame {
     }
 
     private void update(ActionEvent e) {
-        Update u = new Update();
+        Update u = new Update(this);
         u.setVisible(true);
     }
 
     private void delete(ActionEvent e) {
-        Delete d = new Delete();
+        Delete d = new Delete(this);
         d.setVisible(true);
     }
 
     private void list(ActionEvent e) {
-        List l = new List();
+        List l = new List(this);
         l.setVisible(true);
     }
     

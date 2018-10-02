@@ -33,10 +33,12 @@ public class Update extends JFrame {
     private JLabel jLabel5 = new JLabel();
     private JLabel jLabel6 = new JLabel();
     private JLabel jLabel7 = new JLabel();
+    private MainFrame mf;
 
-    public Update() {
+    public Update(MainFrame mf) {
         try {
             jbInit();
+            this.mf = mf;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,7 +52,7 @@ public class Update extends JFrame {
         jButton2.setBounds(new Rectangle(145, 225, 100, 20));
         jButton2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    jButton1_actionPerformed(e);
+                    jButton2_actionPerformed(e);
                 }
             });
         jButton1.setText("Update");
@@ -109,7 +111,23 @@ public class Update extends JFrame {
         int number = Integer.parseInt(jTextField6.getText());
         double height = Double.parseDouble(jTextField7.getText());
         Footballer f = new Footballer(id, forename, surname, position, club, number, height);
+        mf.update(f);
         }catch (Exception exc){
+            JOptionPane.showMessageDialog(this, "Eye with it handy");
+        }
+    }
+
+    private void jButton2_actionPerformed(ActionEvent e) {
+        try{
+            String id = jTextField1.getText();
+            Footballer f = mf.read(id);
+            jTextField2.setText(f.getForename());
+            jTextField3.setText(f.getSurname());
+            jTextField4.setText(f.getPosition());
+            jTextField5.setText(f.getClub());
+            jTextField6.setText(String.valueOf(f.getNumber()));
+            jTextField7.setText(String.valueOf(f.getHeight()));
+        }catch(Exception exc){
             JOptionPane.showMessageDialog(this, "Eye with it handy");
         }
     }
