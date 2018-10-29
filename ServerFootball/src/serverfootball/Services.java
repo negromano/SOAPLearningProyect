@@ -7,9 +7,11 @@ import java.util.Map;
 
 import javax.jws.WebService;
 
+
 @WebService(targetNamespace = "http://tempuri.org/")
 public class Services {
     
+    ConexionBD conexion;
     Map<String, Footballer> footballers;
     
     /**
@@ -21,6 +23,7 @@ public class Services {
     }
     
     public Services(){
+        conexion = new ConexionBD("SOA","SOA");
         footballers = new HashMap<String, Footballer>();
     }
     
@@ -31,6 +34,8 @@ public class Services {
      *         false if another Footballer already existed with the same id
      */
     public boolean create(Footballer f){
+        String query = "INSERT INTO FOOTBALLER VALUES (";
+        conexion.executeUpdateStatement(query);
         if(footballers.containsKey(f.getId())) return false;
         footballers.put(f.getId(), f);
         return true;
