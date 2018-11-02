@@ -34,7 +34,9 @@ public class Services {
      *         false if another Footballer already existed with the same id
      */
     public boolean create(Footballer f){
-        String query = "INSERT INTO FOOTBALLER VALUES (";
+        String query = "INSERT INTO FOOTBALLER VALUES ( '"+
+            f.getId()+"', '"+f.getForename()+"', '"+f.getSurname()+"', '"+
+            f.getClub()+"', '"+f.getPosition()+"', "+f.getNumber()+", "+f.getHeight()+")";
         conexion.executeUpdateStatement(query);
         if(footballers.containsKey(f.getId())) return false;
         footballers.put(f.getId(), f);
