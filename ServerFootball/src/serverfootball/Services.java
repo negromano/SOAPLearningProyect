@@ -1,5 +1,9 @@
 package serverfootball;
 
+import java.sql.ResultSet;
+
+import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,19 +16,29 @@ import javax.jws.WebService;
 public class Services {
     
     ConexionBD conexion;
-    Map<String, Footballer> footballers;
     
     /**
      * Lists all Footballers from the map
      * @return List containing Footballers
      */
     public List<Footballer> list(){
-        return new ArrayList<Footballer>(footballers.values());
+        ArrayList<Footballer> list = new ArrayList<>();
+        String query = "SELECT * FROM FOOTBALLER WHERE ID";
+        ResultSet rs = conexion.executeQueryStatement(query);
+        try {
+                while(rs.next()){
+                    list.add( new Footballer(rs.getString("ID"),rs.getString("FORENAME"),rs.getString("SURNAME"),
+                        rs.getString("POSITION"),rs.getString("CLUB"),rs.getInt("PLAYER_NUM"),
+                                 rs.getDouble("HEIGHT")) );
+               }
+        } catch (SQLException ex) {
+               System.out.println(ex.getMessage());
+        }
+        return list;
     }
     
     public Services(){
         conexion = new ConexionBD("SOA","SOA");
-        footballers = new HashMap<String, Footballer>();
     }
     
     /**
@@ -38,8 +52,6 @@ public class Services {
             f.getId()+"', '"+f.getForename()+"', '"+f.getSurname()+"', '"+
             f.getClub()+"', '"+f.getPosition()+"', "+f.getNumber()+", "+f.getHeight()+")";
         conexion.executeUpdateStatement(query);
-        if(footballers.containsKey(f.getId())) return false;
-        footballers.put(f.getId(), f);
         return true;
     }
     
@@ -50,7 +62,18 @@ public class Services {
      *         nulll if the key is not present
      */
     public Footballer read(String id){
-        return footballers.get(id);
+        String query = "SELECT * FROM FOOTBALLER WHERE ID ='"+id+"'";
+        ResultSet rs = conexion.executeQueryStatement(query);
+        try {
+                while(rs.next()){
+                    return new Footballer(id,rs.getString("FORENAME"),rs.getString("SURNAME"),
+                        rs.getString("POSITION"),rs.getString("CLUB"),rs.getInt("PLAYER_NUM"),
+                                 rs.getDouble("HEIGHT"));
+               }
+        } catch (SQLException ex) {
+               System.out.println(ex.getMessage());
+        }
+        return null;
     }
     
     /**
@@ -60,9 +83,9 @@ public class Services {
      *         false if the Footballer didn't exist
      */
     public boolean update(Footballer f){
-        if(!footballers.containsKey(f.getId())) return false;
-        footballers.remove(f.getId());
-        footballers.put(f.getId(), f);
+        String query = "UPDATE FOOTBALLER SET FORENAME ='"+f.getForename()+"', SURNAME='"+f.getSurname()+
+                       "',CLUB='"+f.getClub()+"', POSITION='"
+                       +f.getPosition()+"', HEIGHT="+f.getHeight()+",PLAYER_NUM="+f.getNumber();
         return true;
     }
     
@@ -73,8 +96,8 @@ public class Services {
      *         false if key was not found
      */
     public boolean delete(String id){
-        if(!footballers.containsKey(id)) return false;
-        footballers.remove(id);
+        String query = "DELETE FROM FOOTBALLER WHERE ID ='"+id+"'";
+        conexion.executeUpdateStatement(query);
         return true;
     }
     
